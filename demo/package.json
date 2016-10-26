@@ -1,0 +1,15 @@
+{
+  "name": "hello-world",
+  "version": "0.0.1",
+  "main": "index.prod.html",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "steal": "^0.10.5"
+  },
+  "devDependencies": {
+    "steal-tools": "^0.10.7"
+  },
+  "system": {
+    "main": "hello.js"
+  }
+}
