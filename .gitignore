@@ -3,5 +3,6 @@ demo/node_modules/
 demo/build/
 demo/cache/
 demo/dist/
+test/tests/app/dist/
 .idea/
 .DS_Store

@@ -1,12 +1,10 @@
-var stealNw = require("../lib/main");
+var stealElectron = require("../lib/main");
 var stealTools = require("steal-tools");
 
-
-var nwOptions = {
+var electronOptions = {
 	buildDir: './build',
 	platforms: ['darwin'],
 	files: ["dist/**/*", "production.html"]
-	//files: ["./**/*"]
 };
 
 var buildPromise = stealTools.build({
@@ -16,7 +14,7 @@ var buildPromise = stealTools.build({
 });
 
 buildPromise.then(function(buildResult){
-	return stealNw(nwOptions, buildResult);
+	return stealElectron(electronOptions, buildResult);
 })
 .then(function(){
 	console.log("Build successful");
