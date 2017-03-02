@@ -1,15 +1,19 @@
 {
-  "name": "hello-world",
-  "version": "0.0.1",
-  "main": "index.prod.html",
-  "dependencies": {
-    "jquery": "^2.1.4",
-    "steal": "^0.10.5"
-  },
-  "devDependencies": {
-    "steal-tools": "^0.10.7"
-  },
-  "system": {
-    "main": "hello.js"
+ "name": "hello-world",
+ "version": "0.0.1",
+ "main": "electron-main.js",
+ "dependencies": {
+  "jquery": "^2.1.4",
+  "steal": "1.2.10"
+ },
+ "devDependencies": {
+  "electron": "^1.4.1",
+  "steal-tools": "^1.0.0"
+ },
+ "steal": {
+  "main": "hello.js",
+  "electron": {
+   "main": "electron-main.js"
   }
+ }
 }
