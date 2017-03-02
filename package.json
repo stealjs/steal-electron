@@ -26,11 +26,9 @@
   },
   "homepage": "https://github.com/stealjs/steal-electron",
   "dependencies": {
-    "electron-packager": "^8.1.0",
+    "cheerio": "^0.22.0",
+    "electron-packager": "^8.5.0",
     "pdenodeify": "^0.1.0",
     "rimraf": "^2.4.0"
-  },
-  "system": {
-    "npmDependencies": []
   }
 }
