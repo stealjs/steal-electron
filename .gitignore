@@ -7,3 +7,4 @@ demo/dist/
 test/tests/app/dist/
 .idea/
 .DS_Store
+npm-debug.log
