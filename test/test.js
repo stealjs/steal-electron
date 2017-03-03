@@ -8,36 +8,7 @@ var cheerio = require("cheerio");
 
 describe("steal-electron", function(){
 	describe("A normal application", function(){
-		before(function(done){
-			helpers.rmdir(__dirname + "/build")
-			.then(function(){
-				var electronOptions = {
-					buildDir: './build',
-					platforms: ['darwin'],
-					files: ["dist/**/*", "production.html"]
-				};
-
-				var buildResult = {
-					configuration: {
-						dest: __dirname + "/tests/app/dist"
-					},
-					loader: {
-						baseURL: __dirname + "/tests/app"
-					}
-				};
-
-				helpers.stubExportPackager(stealElectron, buildResult);
-
-				var fin = function() { done(); }
-				stealElectron(electronOptions, buildResult).then(fin, done);
-			});
-		});
-
-		after(function(done){
-			var fin = function() { done(); };
-			helpers.rmdir(__dirname + "/tests/app/build")
-			.then(fin, done);
-		});
+		helpers.setup(__dirname + "/tests/app");
 
 		it("Copies over the production files", function(){
 			assert(exists(__dirname + "/tests/app/build/test/tests/app/production.html"));
@@ -55,6 +26,15 @@ describe("steal-electron", function(){
 			var $ = cheerio.load(src);
 			var env = $("script").attr("env");
 			assert.equal(env, undefined, "There is no env attr");
+		});
+	});
+
+	describe("An app with no steal.electron", function(){
+		helpers.setup(__dirname + "/tests/app2");
+
+		it("Updates the package.json steal.electron config", function(){
+			var pkg = require(__dirname + "/tests/app2/package.json");
+			assert.equal(pkg.steal.electron.main, "electron-main.js");
 		});
 	});
 
