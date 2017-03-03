@@ -50,6 +50,28 @@ describe("steal-electron", function(){
 		});
 	});
 
+	describe("An app with an alternative HTML file", function(){
+		helpers.setup(__dirname + "/tests/app", function(options){
+			var idx = options.files.indexOf("production");
+			options.files.splice(idx, 1, "other-production.html");
+			options.indexPage = "other-production.html";
+		});
+
+		it("Copies over the correct production HTML", function(){
+			assert(!exists(__dirname + "/tests/app/build/test/tests/app/production.html"),
+				"Didn't copy over the wrong HTML file");
+			assert(exists(__dirname + "/tests/app/build/test/tests/app/other-production.html"),
+				"Did copy over the right HTML file");
+		});
+
+		it("Adds env=electron-production to the steal script tag", function(){
+			var src = readFile(__dirname + "/tests/app/build/test/tests/app/other-production.html");
+			var $ = cheerio.load(src);
+			var env = $("script").attr("env");
+			assert.equal(env, "electron-production", "The env attr was added");
+		});
+	});
+
 	describe("An app that doesn't exist", function(){
 		before(function(done){
 			helpers.rmdir(__dirname + "/build")
