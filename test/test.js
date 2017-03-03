@@ -29,6 +29,18 @@ describe("steal-electron", function(){
 		});
 	});
 
+	describe("When no electronOptions.main is provided", function(){
+		helpers.setup(__dirname + "/tests/app", function(options){
+			delete options.main;
+		}, true);
+
+		it("Causes a build error", function(){
+			var error = this.buildError;
+			assert.ok(error, "Got an error");
+			assert.ok(error instanceof Error, "it's an Error");
+		})
+	});
+
 	describe("A normal application - using glob config", function(){
 		helpers.setup(__dirname + "/tests/app", function(options){
 			options.glob = options.files.concat(["some-file.js"]);
@@ -38,15 +50,6 @@ describe("steal-electron", function(){
 		it("Copies over files part of that glob", function(){
 			assert(exists(__dirname + "/tests/app/build/test/tests/app/production.html"));
 			assert(exists(__dirname + "/tests/app/build/test/tests/app/some-file.js"));
-		});
-	});
-
-	describe("An app with no steal.electron", function(){
-		helpers.setup(__dirname + "/tests/app2");
-
-		it("Updates the package.json steal.electron config", function(){
-			var pkg = require(__dirname + "/tests/app2/package.json");
-			assert.equal(pkg.steal.electron.main, "electron-main.js");
 		});
 	});
 

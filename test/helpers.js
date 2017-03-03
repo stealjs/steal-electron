@@ -43,12 +43,12 @@ exports.stubExportPackager = function(stealElectron, buildResult){
 	};
 };
 
-exports.setup = function(projectPath, setup){
+exports.setup = function(projectPath, setup, dontFail){
 	before(function(done){
 		this.oldPackageJSON = readFile(path.join(projectPath, "package.json"));
 
-
 		var electronOptions = {
+			main: "options.main",
 			buildDir: './build',
 			platforms: ['darwin'],
 			files: ["dist/**/*", "production.html"]
@@ -71,7 +71,14 @@ exports.setup = function(projectPath, setup){
 		exports.stubExportPackager(stealElectron, buildResult);
 
 		var fin = function() { done(); }
-		stealElectron(electronOptions, buildResult).then(fin, done);
+		var fail = function(err){
+			if(!dontFail) {
+				done(err);
+			}
+			this.buildError = err;
+			done();
+		}.bind(this);
+		stealElectron(electronOptions, buildResult).then(fin, fail);
 	});
 
 	after(function(done){
