@@ -1,4 +1,6 @@
 [![npm version](https://badge.fury.io/js/steal-electron.svg)](http://badge.fury.io/js/steal-electron)
+[![Build Status](https://travis-ci.org/stealjs/steal-electron.svg?branch=master)](https://travis-ci.org/stealjs/steal-electron)
+[![Coverage Status](https://coveralls.io/repos/github/stealjs/steal-electron/badge.svg?branch=master)](https://coveralls.io/github/stealjs/steal-electron?branch=master)
 
 # steal-electron
 
