@@ -29,6 +29,18 @@ describe("steal-electron", function(){
 		});
 	});
 
+	describe("A normal application - using glob config", function(){
+		helpers.setup(__dirname + "/tests/app", function(options){
+			options.glob = options.files.concat(["some-file.js"]);
+			delete options.files;
+		});
+
+		it("Copies over files part of that glob", function(){
+			assert(exists(__dirname + "/tests/app/build/test/tests/app/production.html"));
+			assert(exists(__dirname + "/tests/app/build/test/tests/app/some-file.js"));
+		});
+	});
+
 	describe("An app with no steal.electron", function(){
 		helpers.setup(__dirname + "/tests/app2");
 

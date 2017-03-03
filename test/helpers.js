@@ -43,7 +43,7 @@ exports.stubExportPackager = function(stealElectron, buildResult){
 	};
 };
 
-exports.setup = function(projectPath){
+exports.setup = function(projectPath, setup){
 	before(function(done){
 		this.oldPackageJSON = readFile(path.join(projectPath, "package.json"));
 
@@ -62,6 +62,11 @@ exports.setup = function(projectPath){
 				baseURL: projectPath
 			}
 		};
+
+		// Allow overriding stuff
+		if(setup) {
+			setup(electronOptions, buildResult);
+		}
 
 		exports.stubExportPackager(stealElectron, buildResult);
 
