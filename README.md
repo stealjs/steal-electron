@@ -21,6 +21,7 @@ var stealTools = require("steal-tools");
 var stealElectron = require("steal-electron");
 
 var electronOptions = {
+  main: "electron-main.js",
   buildDir: "./build",
   platforms: ["osx"],
   files: ["./**/*"]
@@ -41,7 +42,29 @@ buildPromise.then(function(buildResult){
 
 ### ElectronOptions
 
-Electron options are passed as the first argument are the same as documented on [node-webkit-builder](https://github.com/mllrsohn/node-webkit-builder).
+These are options that get passed into [electron-packager](https://github.com/electron-userland/electron-packager). Aside from the options that takes, these options are also available:
+
+#### main
+
+Specify your `main` Electron module:
+
+```
+main: "electron-main.js"
+```
+
+If the `main` does not exist, steal-electron will add a generate Electron module to your project.
+
+#### indexPage
+
+Specify the index HTML page to use. This is the page that Electron will use to launch your application.
+
+```
+indexPage: "index.production.html"
+```
+
+#### glob
+
+Alias for `files`. Specify a glob pattern of files to move into the destination folder.
 
 ### BuildResult
 
