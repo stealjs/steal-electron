@@ -48,10 +48,10 @@ exports.setup = function(projectPath, setup, dontFail){
 		this.oldPackageJSON = readFile(path.join(projectPath, "package.json"));
 
 		var electronOptions = {
-			main: "options.main",
+			main: "electron-main.js",
 			buildDir: './build',
 			platforms: ['darwin'],
-			files: ["dist/**/*", "production.html"]
+			files: ["dist/**/*", "production.html", "electron-main.js"]
 		};
 
 		var buildResult = {
@@ -74,11 +74,20 @@ exports.setup = function(projectPath, setup, dontFail){
 		var fail = function(err){
 			if(!dontFail) {
 				done(err);
+				return;
 			}
 			this.buildError = err;
 			done();
 		}.bind(this);
 		stealElectron(electronOptions, buildResult).then(fin, fail);
+	});
+
+	afterEach(function(done){
+		exports.rmdir(path.join(projectPath, "electron-main.js"))
+		.then(null, function(){})
+		.then(function(){
+			done();
+		});
 	});
 
 	after(function(done){

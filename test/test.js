@@ -12,6 +12,7 @@ describe("steal-electron", function(){
 
 		it("Copies over the production files", function(){
 			assert(exists(__dirname + "/tests/app/build/test/tests/app/production.html"));
+			assert(exists(__dirname + "/tests/app/build/test/tests/app/electron-main.js"));
 		});
 
 		it("Adds env=electron-production to the steal script tag", function(){
@@ -55,7 +56,7 @@ describe("steal-electron", function(){
 
 	describe("An app with an alternative HTML file", function(){
 		helpers.setup(__dirname + "/tests/app", function(options){
-			var idx = options.files.indexOf("production");
+			var idx = options.files.indexOf("production.html");
 			options.files.splice(idx, 1, "other-production.html");
 			options.indexPage = "other-production.html";
 		});
