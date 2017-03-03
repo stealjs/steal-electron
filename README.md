@@ -23,7 +23,7 @@ var stealElectron = require("steal-electron");
 var electronOptions = {
   main: "electron-main.js",
   buildDir: "./build",
-  platforms: ["osx"],
+  platforms: ["darwin"],
   files: ["./**/*"]
 };
 
