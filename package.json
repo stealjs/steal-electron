@@ -32,7 +32,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "electron-packager": "^8.5.0",
-    "fs-extra": "^3.0.0",
+    "fs-extra": "^4.0.0",
     "pdenodeify": "^0.1.0"
   },
   "devDependencies": {
