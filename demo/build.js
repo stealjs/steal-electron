@@ -2,8 +2,9 @@ var stealElectron = require("../lib/main");
 var stealTools = require("steal-tools");
 
 var electronOptions = {
-	buildDir: './build',
-	platforms: ['darwin'],
+	buildDir: "./build",
+	platforms: ["darwin"],
+	main: "electron-main.js",
 	files: ["dist/**/*", "production.html"]
 };
 

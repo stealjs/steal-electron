@@ -1,3 +1,3 @@
 var $ = require("jquery");
 
-$("#app").html("Hello World!");
+$("#app").html("<h1>Hello, World!</h1>");
