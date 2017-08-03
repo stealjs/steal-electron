@@ -1,19 +1,22 @@
 {
- "name": "hello-world",
- "version": "0.0.1",
- "main": "electron-main.js",
- "dependencies": {
-  "jquery": "^2.1.4",
-  "steal": "1.2.10"
- },
- "devDependencies": {
-  "electron": "^1.4.1",
-  "steal-tools": "^1.0.0"
- },
- "steal": {
-  "main": "hello.js",
-  "electron": {
-   "main": "electron-main.js"
+  "name": "hello-world",
+  "version": "0.0.1",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron production.html"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "steal": "^1.5.6"
+  },
+  "devDependencies": {
+    "electron": "^1.6.11",
+    "steal-tools": "^1.7.0"
+  },
+  "steal": {
+    "main": "hello.js",
+    "electron": {
+      "main": "electron-main.js"
+    }
   }
- }
 }
