@@ -1,8 +1,6 @@
 var copy = require("copy");
 var fse = require("fs-extra");
-var exists = fse.existsSync;
 var readFile = fse.readFileSync;
-var writeFile = fse.writeFileSync;
 var path = require("path");
 var stealElectron = require("../lib/main");
 
@@ -90,11 +88,16 @@ exports.setup = function(projectPath, setup, dontFail){
 		});
 	});
 
-	after(function(done){
-		writeFile(path.join(projectPath, "package.json"), this.oldPackageJSON);
+	after(function(done) {
+		var oldPackageJson = this.oldPackageJSON.toString();
+		var packageJson = readFile(path.join(projectPath, "package.json")).toString();
 
-		var fin = function() { done(); };
 		exports.rmdir(path.join(projectPath, "build"))
-		.then(fin, done);
+			.then(function() {
+				if (packageJson !== oldPackageJson) {
+					throw new Error("Application package.json should not be mutated");
+				}
+			})
+			.then(done, done);
 	});
 };
