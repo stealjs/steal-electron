@@ -31,7 +31,7 @@
   "homepage": "https://github.com/stealjs/steal-electron",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "electron-packager": "^8.5.0",
+    "electron-packager": "^11.0.0",
     "fs-extra": "^4.0.1",
     "pdenodeify": "^0.1.0"
   },
